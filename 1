@@ -1,0 +1,77 @@
+#include <cs50.h>
+#include <stdio.h>
+#include <crypt.h>
+#include <string.h>
+
+string compare(char alpha, string hashed, string password, string salt);
+int main(int argc, string argv[])
+{
+    if(argc != 2)
+    {
+        printf("Usage: ./crack hash");
+        return 1;
+    }
+    string hashed = argv[1];
+    string salt;
+    
+    for(int i = 0; i < 2; i++) //assign value from hashed to salt
+    {
+        salt[i] = hashed[i];
+        printf("%c", salt[i]);
+    }
+    char password[5];
+ 
+    char alpha [] =
+    {
+        'a','b','c','d','e','f','g','h','i',
+		'j','k','l','m','n','o','p','q','r',
+        's','t','u','v','w','x','y','z',
+        'A','B','C','D','E','F','G','H','I','J',
+		'K','L','M','N','O','P','Q','R','S',
+        'T','U','V','W','X','Y','Z','\0'
+    };
+    
+   for(int i = 0; i < strlen(alpha); i++)
+   {
+       password[0] = compare(alpha[i], hashed, password, salt);
+	   
+	   for(int j = 0; j < strlen(alpha); j++)
+	   {
+			password[1] = compare(alpha[j], hashed, password, salt);
+			
+			for(int k = 0; k < strlen(alpha); k++)
+			{
+				password[2] = compare(alpha[k], hashed, password, salt);
+				
+				for(int l = 0; l < strlen(alpha); l++)
+				{
+					password[3] = compare(alpha[l], hashed, password, salt);
+					
+					for(int m = 0; m < strlen(alpha); m++)
+					{
+						password[4] = compare(alpha[m], hashed, password, salt);
+					}
+					
+				}
+			
+			}
+
+	    }
+        
+    }
+   
+}
+
+string compare(char alpha, string hashed, string password, string salt)
+{
+	password = alpha; // the alpha's char is assigned to string password but at presumably 1st char
+    if(strcmp(crypt(password,salt), hashed)) 
+    {
+        printf("%s",password); 
+        return 0; //end the program all together	
+	}
+	else
+	{
+		return alpha;
+	}
+}
