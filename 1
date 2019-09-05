@@ -24,10 +24,10 @@ int main(int argc, string argv[])
     char alpha [] =
     {
         'a','b','c','d','e','f','g','h','i',
-		'j','k','l','m','n','o','p','q','r',
+	'j','k','l','m','n','o','p','q','r',
         's','t','u','v','w','x','y','z',
         'A','B','C','D','E','F','G','H','I','J',
-		'K','L','M','N','O','P','Q','R','S',
+	'K','L','M','N','O','P','Q','R','S',
         'T','U','V','W','X','Y','Z','\0'
     };
     
@@ -64,11 +64,12 @@ int main(int argc, string argv[])
 
 string compare(char alpha, string hashed, string password, string salt)
 {
-	password = alpha; // the alpha's char is assigned to string password but at presumably 1st char
-    if(strcmp(crypt(password,salt), hashed)) 
-    {
-        printf("%s",password); 
-        return 0; //end the program all together	
+	password = alpha; // the alpha's char is assigned to string password
+	//how do i make sure the alpha[0] to password[0], alpha[1] to password[1] and so on. 
+    	if(strcmp(crypt(password,salt), hashed)) 
+   	{
+        	printf("%s",password); 
+        	return 0; //end the program all together	
 	}
 	else
 	{
