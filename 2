@@ -18,14 +18,15 @@ int main(void)
     
     for(int i = 0; i < p; i++)
     {
-        pass[0][0] = compare(poss[i], crpted, pass[0], salt, 0);
+        pass[0][0] = compare(poss[i], crypted, pass[0], salt, 0);
         printf("%s",pass[0]);
     }
 }
 char compare(char alpha, string hashed, string password, string salt, int x)
 {
     password[0][x] = alpha;
-    if(strcmp(crypt((password[0],salt), hashed)))
+    string q = crypt(password[0],salt);
+    if(strcmp(q, hashed))
     {
         printf("%s",password[0]); 
         exit(0); 
@@ -39,6 +40,6 @@ char compare(char alpha, string hashed, string password, string salt, int x)
 My expectations on how this program should run
 line 21, these args are passed into a function that return a char
 line 27, char 'a' is passed into password[0][0] location. making the password[0] string an 'a'
-line 28, the strcmp func will compare a cyphered password[0] which is 'a' and salt of "12" against the hashed.
+line 29, the strcmp func will compare string q against the hashed.
 line 28, since it is false, it will go to line 33, which return char 'a' into pass[0][0] at line 21.
 line 22, will print out 'a'. 
