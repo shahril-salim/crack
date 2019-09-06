@@ -3,7 +3,7 @@
 #include <crypt.h>
 #include <string.h>
 
-string compare(char alpha, string hashed, string password, string salt);
+char compare(char alpha, string hashed, string password[1], string salt [1], int x);
 int main(int argc, string argv[])
 {
     if(argc != 2)
@@ -12,44 +12,45 @@ int main(int argc, string argv[])
         return 1;
     }
     string hashed = argv[1];
-    string salt;
+    string salt[1];
     
     for(int i = 0; i < 2; i++) //assign value from hashed to salt
     {
-        salt[i] = hashed[i];
-        printf("%c", salt[i]);
+        salt[0][i] = hashed[i];
+        printf("%s", salt[0]);
     }
-    char password[5];
+    
+    string password[1];
  
     char alpha [] =
     {
         'a','b','c','d','e','f','g','h','i',
-	'j','k','l','m','n','o','p','q','r',
+		'j','k','l','m','n','o','p','q','r',
         's','t','u','v','w','x','y','z',
         'A','B','C','D','E','F','G','H','I','J',
-	'K','L','M','N','O','P','Q','R','S',
+		'K','L','M','N','O','P','Q','R','S',
         'T','U','V','W','X','Y','Z','\0'
     };
     
    for(int i = 0; i < strlen(alpha); i++)
    {
-       password[0] = compare(alpha[i], hashed, password, salt);
+       password[0][0] = compare(alpha[i], hashed, password, salt, 0);
 	   
 	   for(int j = 0; j < strlen(alpha); j++)
 	   {
-			password[1] = compare(alpha[j], hashed, password, salt);
+			password[0][1] = compare(alpha[j], hashed, password, salt, 1);
 			
 			for(int k = 0; k < strlen(alpha); k++)
 			{
-				password[2] = compare(alpha[k], hashed, password, salt);
+				password[0][2] = compare(alpha[k], hashed, password, salt, 2);
 				
 				for(int l = 0; l < strlen(alpha); l++)
 				{
-					password[3] = compare(alpha[l], hashed, password, salt);
+					password[0][3] = compare(alpha[l], hashed, password, salt, 3);
 					
 					for(int m = 0; m < strlen(alpha); m++)
 					{
-						password[4] = compare(alpha[m], hashed, password, salt);
+						password[0][4] = compare(alpha[m], hashed, password, salt, 4);
 					}
 					
 				}
@@ -62,17 +63,17 @@ int main(int argc, string argv[])
    
 }
 
-string compare(char alpha, string hashed, string password, string salt)
+char compare(char alpha, string hashed, string password[1], string salt[1], int x)
 {
-	password = alpha; // the alpha's char is assigned to string password
-	//how do i make sure the alpha[0] to password[0], alpha[1] to password[1] and so on. 
-    	if(strcmp(crypt(password,salt), hashed)) 
-   	{
-        	printf("%s",password); 
-        	return 0; //end the program all together	
+	password[0][x] = alpha; // wrong
+    
+    if(strcmp(crypt(password[0],salt[0]), hashed)) 
+    {
+        printf("%s",password[0]); 
+        exit(0); //end the program all together	
 	}
 	else
 	{
-		return alpha;
+		return alpha;//wrong
 	}
 }
