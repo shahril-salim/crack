@@ -3,13 +3,13 @@
 #include <crypt.h>
 #include <string.h>
 
-char compare(char alpha, string hashed, string password[1], string salt [1], int x);
+char compare(char alpha, string hashed, string password, string salt, int x);
 int main(void)
 {
     string k ="e";
     string salt = "12";
-    string crypted = crypt(k,s);
-    printf("%s\n",c);
+    string crypted = crypt(k,salt);
+    printf("%s\n",crypted);
     
     string pass[1];
     char poss [] = {'a','b','c','d','e','\0'};
